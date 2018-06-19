@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <style media="screen">
+      .nav, .nav_li{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .nav{
+        background-color: #e28888;
+      }
+      .nav_li{
+        display: inline-block;
+        color: white;
+        padding: 1rem;
+      }
+      .nav_li.hover{
+        background-color: #f7aeae;
+      }
+      .content{
+        margin: 0;
+        list-style: none;
+        padding: 1rem;
+        background-color: #8e88e2;
+        display: none;
+      }
+      .content.open{
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <ul class="nav"><li class="nav_li">123</li><li class="nav_li">456</li></ul>
+      <ul class="content">
+        <li>123</li>
+        <li>456</li>
+      </ul>
+    </header>
+    <script>
+      $.fn.extend({
+        headerTabs: function() {
+          if (this.prop('tagName') === 'HEADER') {
+            var $contentUl = this.find('ul.content'),
+              $navLi = this.find('li.nav_li');
+            $navLi.on('mouseenter', function (e) {
+              var index = $(e.currentTarget).index(),
+                  $contentLi = $contentUl.find('li');
+              $navLi.removeClass('hover');
+              $(e.currentTarget).addClass('hover');
+              $contentUl.addClass('open');
+              $contentLi.css('display', 'none');
+              if ($contentLi[index]) {
+                $contentLi[index].style.display = 'block';
+              }
+            });
+            this.on('mouseleave', function (e) {
+              $contentUl.removeClass('open');
+              $navLi.removeClass('hover');
+            });
+          }
+        }
+      });
+      $('header').headerTabs();
+    </script>
+  </body>
+</html>

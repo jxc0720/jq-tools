@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <style media="screen">
+            *{
+                box-sizing: border-box;
+                border: 1px solid;
+            }
+            .round-button-wrapper{
+                position: fixed;
+                top: 0;
+                right: 0;
+            }
+            .round-button-wrapper .button-list{
+                margin: 0;
+                padding: 0;
+                display: inline-block;
+                position: relative;
+                width: 50px;
+            }
+            .round-button-wrapper .button-list>li{
+                list-style: none;
+                display: block;
+                position: absolute;
+                top: 120px;
+                left: 0;
+                transition: .3s;
+            }
+            .button-list .round-button{
+                width: 50px;
+                height: 50px;
+                border-radius: 100%;
+                background-color: gray;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            }
+            .button-list.open>li:nth-child(1){ top: 0px; }
+            .button-list.open>li:nth-child(2){ top: 60px; }
+            .button-list.open>li:nth-child(3){ top: 120px; }
+            .button-list .round-button.switch{
+                z-index: 1;
+            }
+            .button-list.open .round-button.switch:first-child{
+                display: none;
+            }
+            .button-list .round-button.switch:nth-child(2){
+                display: none;
+            }
+            .button-list.open .round-button.switch:nth-child(2){
+                display: flex;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="height: 1280px;"></div>
+        <div class="round-button-wrapper">
+            <ul class="button-list">
+                <li>
+                    <div class="round-button">1</div>
+                </li>
+                <li>
+                    <div class="round-button">2</div>
+                </li>
+                <li>
+                    <div class="round-button switch">open</div>
+                    <div class="round-button switch">close</div>
+                </li>
+            </ul>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script type="text/javascript">
+            $('.button-list .round-button.switch').on('click', function () {
+                $('.button-list').toggleClass('open');
+            });
+        </script>
+    </body>
+</html>

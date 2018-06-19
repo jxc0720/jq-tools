@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style media="screen">
+        .modal{
+            position: fixed;
+            z-index: 101;
+            background-color: rgba(0, 0, 0, .5);
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+        .modal_active{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal__wrapper{
+          background-color: white;
+          padding: 1rem;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="modal">
+        <div class="modal__wrapper">
+            <div class="modal__body">
+              modal__body
+            </div>
+        </div>
+    </div>
+    <button type="button" name="button" class="js-toggleBtn">Modal</button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript">
+      $.fn.modal = function () {
+        var modal = {
+          isOpen: false,
+          container: this
+        };
+        modal.open = function () {
+          modal.container.addClass('modal_active');
+          modal.isOpen = true;
+        };
+        modal.close = function () {
+          modal.container.removeClass('modal_active');
+          modal.isOpen = false;
+        };
+        modal.container.on('click', function (e) {
+          if ($(e.target).is(modal.container)) {
+            modal.close();
+          }
+        });
+        return modal;
+      };
+      var modal = $('.modal').modal();
+      document.querySelector('.js-toggleBtn').addEventListener('click', function () {
+        modal.open();
+      });
+    </script>
+  </body>
+</html>

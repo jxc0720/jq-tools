@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style media="screen">
+      .js-way-block{
+        display: none;
+      }
+      .js-way-block.active{
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <select class="js-way-select" name="">
+      <option value="" selected>請選擇</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+    </select>
+    <div class="js-way-block">1</div>
+    <div class="js-way-block">2</div>
+    <div class="js-way-block">3</div>
+    <div class="js-way-block">4</div>
+    <script
+      src="http://code.jquery.com/jquery-1.12.4.min.js"
+      integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+      crossorigin="anonymous"></script>
+    <script>
+      $('.js-way-select').on('change', function () {
+        var index = $(this).find(':selected').index() - 1,
+          $wayBlock = $('.js-way-block');
+        $wayBlock.removeClass('active');
+        if (index > -1) {
+          $wayBlock.eq(index).addClass('active');
+        }
+      });
+    </script>
+  </body>
+</html>
